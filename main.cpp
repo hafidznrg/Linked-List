@@ -26,4 +26,18 @@ int main(){
     konso(&head, 4);
 
     printList(head);
+
+    cout << "Insert a new node" << endl;
+    cout << "Insert data: 5";
+    insertPos(&head, 5, 1); //posisi 1
+    printList(head);
+    insertPos(&head, 5, 3); //posisi 3
+    printList(head);
+    insertPos(&head, 5, 12);
+    deletePos(&head, 2);
+    printList(head);
+    deleteData(&head, 2);
+    printList(head);
+    deleteData(&head, 5);
+    printList(head);
 }

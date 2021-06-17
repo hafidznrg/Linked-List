@@ -33,13 +33,74 @@ void konso(Node** head, int new_data){
     }
 }
 
-// void insertAt(Node** head, int new_data, int pos){
-//     Node* new_node = new Node;
-//     Node* node = *head;
-//     new_node->data = new_data;
+void insertPos(Node** head, int new_data, int pos){
+    Node* new_node = new Node;
+    Node* curr = *head;
+    Node* prev = *head;
 
-//     if (head == NULL){
-//         cout << "List Kosong, tidak bisa menyisipkan" << endl;
-//         return;
-//     }
-// }
+    new_node->data = new_data;
+
+    while (pos > 1 && curr != NULL){
+        prev = curr;
+        curr = curr->next;
+        pos--;
+    }
+
+    if (pos == 1){
+        if (curr == prev){
+            new_node->next = (*head);
+            (*head) = new_node;
+        } else {
+            prev->next = new_node;
+            new_node->next = curr;
+        }
+        cout << "Node baru berhasil disisipkan" << endl;
+        return;
+    } else {
+        cout << "Invalid position." << endl;
+        return;
+    }
+}
+
+void deletePos(Node** head, int pos){
+    Node* curr = *head;
+    Node* prev = *head;
+
+    while (pos > 1 && curr != NULL){
+        prev = curr;
+        curr = curr->next;
+        pos--;
+    }
+
+    if (pos == 1){
+        prev->next = curr->next;
+        delete curr;
+        cout << "Node baru berhasil dihapus" << endl;
+        return;
+    } else {
+        cout << "Invalid position." << endl;
+        return;
+    }
+}
+
+void deleteData(Node** head, int dataDel){
+    Node* curr = *head;
+    Node* prev = *head;
+
+    while (curr != NULL && curr->data != dataDel){
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (curr->data == dataDel){
+        if (curr == prev){
+            *head = curr->next;
+        } else {
+            prev->next = curr->next;
+            delete curr;
+        }
+        cout << "Data berhasil dihapus" << endl;
+    } else {
+        cout << "Data tidak ada di dalam list" << endl;
+    }
+}

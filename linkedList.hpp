@@ -12,4 +12,8 @@ void konso(Node** head, int new_data);
 
 void konsDot(Node** head, int new_data);
 
-// void insertAt(Node** head, int new_data, int pos);
+void insertPos(Node** head, int new_data, int pos);
+
+void deletePos(Node** head, int pos);
+
+void deleteData(Node** head, int dataDel);
