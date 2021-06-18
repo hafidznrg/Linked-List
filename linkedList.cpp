@@ -10,6 +10,15 @@ void printList(Node* node){
     cout << "NULL" << endl;
 }
 
+int length(Node* node){
+    int len = 0;
+    while (node != NULL) {
+        len++;
+        node = node->next;
+    }
+    return len;
+}
+
 void konsDot(Node** head, int new_data){
     Node* new_node = new Node;
     new_node->data = new_data;
@@ -103,4 +112,83 @@ void deleteData(Node** head, int dataDel){
     } else {
         cout << "Data tidak ada di dalam list" << endl;
     }
+}
+
+bool searchData(Node** head, int data){
+    Node* node = *head;
+    int index = 0;
+
+    while (node != NULL){
+        index++;
+        if (node->data == data){
+            cout << data << " ditemukan di dalam list pada indeks ke-" << index << endl;
+            return true;
+        }
+        node = node->next;
+    }
+    cout << data << " tidak ada di dalam list" << endl;
+    return false;
+}
+
+void swapPos(Node** head, int pos1, int pos2){
+    int len = length(*head);
+    int count = 1;
+
+    if (len < 2){
+        cout << "Tidak bisa menukar posisi data di dalam list" << endl;
+        return;
+    } else if (pos1 > len || pos2 > len) {
+        cout << "Posisi tidak ada di dalam list" << endl;
+        return;
+    } else if (pos1 == pos2) {
+        cout << "Posisi keduanya sama" << endl;
+        return;
+    } else if (pos1 > pos2) {
+        int temp = pos1;
+        pos1 = pos2;
+        pos2 = temp;
+    }
+
+    Node* prev1 = NULL;
+    Node* front = *head;
+    while (count != pos1) {
+        prev1 = front;
+        front = front->next;
+        count++;
+    }
+    
+    Node* prev2 = NULL;
+    Node* back = front;
+    while (count != pos2 && back != NULL){
+        prev2 = back;
+        back = back->next;
+        count++;
+    }
+
+    // Case posisi 1 merupakan head
+    if (prev1 == NULL)
+        (*head) = back;
+    else
+        prev1->next = back;
+    
+    prev2->next = front;
+
+    Node* temp;
+    // swap front.next and back.next
+    temp = front->next;
+    front->next = back->next;
+    back->next = temp;
+}
+
+void reverse(Node** head){
+    Node *prev = NULL, *next = NULL;;
+    Node *curr = *head;
+
+    while (curr != NULL){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    (*head) = prev;
 }

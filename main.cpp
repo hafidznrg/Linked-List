@@ -28,9 +28,11 @@ int main(){
     printList(head);
 
     cout << "Insert a new node" << endl;
-    cout << "Insert data: 5";
+    cout << "Insert data: 5" << endl;
     insertPos(&head, 5, 1); //posisi 1
+    cout << searchData(&head, 10) << endl;
     printList(head);
+    cout << length(head) << endl;
     insertPos(&head, 5, 3); //posisi 3
     printList(head);
     insertPos(&head, 5, 12);
@@ -39,5 +41,10 @@ int main(){
     deleteData(&head, 2);
     printList(head);
     deleteData(&head, 5);
+    printList(head);
+    cout << "Swap" << endl;
+    swapPos(&head, 1, 4);
+    printList(head);
+    reverse(&head);
     printList(head);
 }
