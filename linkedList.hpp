@@ -25,3 +25,19 @@ bool searchData(Node** head, int data);
 void swapPos(Node** head, int pos1, int pos2);
 
 void reverse(Node** head);
+
+void getNth(Node** head, int n);
+
+void getMiddle(Node** head);
+
+void getFirst(Node** head);
+
+void getLast(Node** head);
+
+Node ambilDepan(Node** head);
+
+Node ambilBelakang(Node** head);
+
+int findMax(Node** head);
+
+void sort(Node** head);

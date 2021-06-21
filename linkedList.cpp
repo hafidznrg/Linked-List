@@ -192,3 +192,150 @@ void reverse(Node** head){
     }
     (*head) = prev;
 }
+
+void getNth(Node** head, int n){
+    Node *curr = *head;
+    int count = 1;
+
+    while (count != n && curr != NULL) {
+        curr = curr->next;
+        count++;
+    }
+
+    if (count == n) {
+        cout << "Data ke-" << n << " bernilai " << curr->data << endl;
+        return;
+    } else {
+        cout << "Invalid position" << endl;
+        return;
+    }
+}
+
+void getMiddle(Node** head){
+    Node *satu = *head;
+    Node *setengah = *head;
+
+    if (*head != NULL){
+        while (satu != NULL && satu->next != NULL){
+            satu = satu->next->next;
+            setengah = setengah->next;
+        }
+    }
+    cout << "Node tengahnya bernilai " << setengah->data << endl;
+}
+
+void getFirst(Node** head){
+    Node *node = *head;
+    cout << "Data pertama : " << node->data << endl;
+}
+
+void getLast(Node** head){
+    Node *node = *head;
+
+    while (node != NULL && node->next != NULL){
+        node = node->next;
+    }
+
+    cout << "Data terakhir : " << node->data << endl;
+}
+
+Node ambilDepan(Node** head){
+    Node *node = *head;
+    return *node;
+}
+
+Node ambilBelakang(Node** head){
+    Node *node = *head;
+
+    while (node != NULL && node->next != NULL){
+        node = node->next;
+    }
+
+    return *node;
+}
+
+int findMax(Node** head){
+    Node *curr = *head;
+    int max;
+
+    if (*head != NULL)
+        max = curr->data;
+    else {
+        cout << "List kosong" << endl;
+        return 0 ;
+    }
+
+    while (curr != NULL) {
+        if (max < curr->data) 
+            max = curr->data;
+        curr = curr->next;
+    }
+
+    return max;
+}
+
+void sort(Node** head) {
+    Node *curr = *head, *max = *head;
+    Node *new_head = NULL;
+    Node *prev = NULL, *prevMax = NULL, *new_curr = NULL;
+
+    if (*head == NULL)
+        return;
+
+    // Set head
+    while (curr != NULL){
+        if (max->data < curr->data){
+            max = curr;
+            prevMax = prev;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    // max ditemukan, kemudian set menjadi head
+    new_head = max;
+    new_curr = new_head;
+    if (prevMax != NULL)
+        prevMax->next = max->next; //cabut max
+    else
+        (*head) = max->next;
+
+    cout << "Cek" << endl;
+    cout << max->data << "   " << endl;
+    cout << endl;
+
+    Node *pivot = *head;
+    while (pivot != NULL){
+        prev = NULL;
+        prevMax = NULL;
+        max = pivot;
+        curr = pivot;
+
+        while (curr != NULL){
+            if (max->data < curr->data){
+                max = curr;
+                prevMax = prev;
+            }
+            prev = curr;
+            curr = curr->next;
+        }
+
+        if (prevMax == NULL)
+            (*head) = max->next;
+
+        // menambahkan ke new linked list
+        new_curr->next = max;
+        if (prev == max)
+            prevMax->next = max->next;
+        else
+            prev->next = max->next;
+
+        new_curr = new_curr->next;
+        if (pivot->next == NULL){
+            new_curr->next = pivot;
+            pivot = NULL;
+        }
+        // printList(new_head);
+    }
+
+    (*head) = new_head;
+}
