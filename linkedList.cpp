@@ -299,10 +299,6 @@ void sort(Node** head) {
     else
         (*head) = max->next;
 
-    cout << "Cek" << endl;
-    cout << max->data << "   " << endl;
-    cout << endl;
-
     Node *pivot = *head;
     while (pivot != NULL){
         prev = NULL;
@@ -334,7 +330,6 @@ void sort(Node** head) {
             new_curr->next = pivot;
             pivot = NULL;
         }
-        // printList(new_head);
     }
 
     (*head) = new_head;
